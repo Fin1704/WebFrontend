@@ -1,4 +1,5 @@
 'use client'
+import WatchingYou, { useWatchingYou } from 'react-watching-you';
 
 import { Stack, Flex, Button, Text, VStack, useBreakpointValue, Image, Box } from '@chakra-ui/react'
 import TransImageLeft from "../asset/left-overlay.png"
@@ -131,7 +132,9 @@ export default function WithBackgroundImage() {
             backgroundSize={"cover"}
             backgroundPosition={'center center'}
         >
-    
+     <WatchingYou>
+      <div>O</div>
+    </WatchingYou>
             <Image
                 position="absolute"
                 bottom="0"

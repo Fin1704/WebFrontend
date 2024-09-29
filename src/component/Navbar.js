@@ -126,7 +126,7 @@ const DesktopNav = () => {
                                 as="a"
                                 p={4}
                                 href={navItem.href ?? '#'}
-                                fontSize={'xl'}
+                                fontSize={'md'}
                                 fontWeight={700}
                                 color={linkColor}
                                 _hover={{
@@ -225,14 +225,14 @@ const NAV_ITEMS = [
         label: 'RollApp',
         href: '#',
     },
-    {
-        label: 'Buy',
-        href: '#',
-    },
-    {
-        label: 'Sell',
-        href: '#',
-    },
+    // {
+    //     label: 'Buy',
+    //     href: '#',
+    // },
+    // {
+    //     label: 'Sell',
+    //     href: '#',
+    // },
     {
         label: 'Faucet',
         href: '#',
