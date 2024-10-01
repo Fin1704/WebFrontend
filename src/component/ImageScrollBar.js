@@ -1,5 +1,5 @@
 'use client'
-import { Stack, Flex, Button, Text, VStack, Image, Box, Center } from '@chakra-ui/react'
+import { Stack, Flex, Button, Text, VStack, Image, Box, Center, IconButton } from '@chakra-ui/react'
 import TransImageLeft from "../asset/left-overlay.png"
 import TransImageRight from "../asset/right-overlay.png"
 import TransImageDown from "../asset/down-overlay.png"
@@ -7,6 +7,7 @@ import TransImageTop from "../asset/top-overlay.png"
 import Game1 from "../asset/blackjack.jpg"
 import { useEffect, useRef, useState } from 'react'
 import { useSpring, animated } from 'react-spring';
+import { CloseIcon } from '@chakra-ui/icons'
 
 const HorizontalNav = ({ currentIndex, setCurrentIndex, items }) => {
     const maxItemsToShow = 4;
@@ -53,7 +54,6 @@ const HorizontalNav = ({ currentIndex, setCurrentIndex, items }) => {
                         >
                             <Flex alignItems="center" justifyContent="center">
                                 <Image
-
                                     src={item.image}
                                     alt={item.title}
                                     boxSize="50px"
@@ -77,12 +77,12 @@ const HorizontalNav = ({ currentIndex, setCurrentIndex, items }) => {
     );
 };
 
-
-
 export default function WithBackgroundImage() {
     const [items, setItems] = useState([]);
     const [currentIndex, setCurrentIndex] = useState(0);
     const [currentItem, setCurrentItem] = useState();
+    const [isBoxVisible, setIsBoxVisible] = useState(false); // New state to control box visibility
+    const [iframeContent, setIframeContent] = useState(''); // New state to store iframe content
 
     const fadeInProps = useSpring({
         opacity: 1,
@@ -124,6 +124,11 @@ export default function WithBackgroundImage() {
         return <div>Loading...</div>; // Show loading state while fetching data
     }
 
+    const handleButtonClick = () => {
+        setIframeContent(currentItem.iframe); // Set the iframe content from currentItem
+        setIsBoxVisible(true); // Show the box with iframe
+    };
+
     return (
         <Flex
             w={'full'}
@@ -132,10 +137,29 @@ export default function WithBackgroundImage() {
             backgroundSize={"cover"}
             backgroundPosition={'center center'}
         >
-            <Box width={"100vw"} alignContent={"center"} height={"100vh"} background={" rgba(0, 0, 0, 0.5)"} top={"0px"} zIndex={10} position={"fixed"} >
+            <Box
+                width={"100vw"}
+                alignContent={"center"}
+                height={"100vh"}
+                background={"rgba(0, 0, 0, 0.86)"}
+                top={"0px"}
+                zIndex={10}
+                position={"fixed"}
+                display={isBoxVisible ? "block" : "none"} // Conditionally render the box
+            >
+                <IconButton position={"fixed"} left={"0px"} top={"0px"}
+                    variant='outline'
+                    colorScheme='teal'
+                    aria-label='Close'
+                    icon={<CloseIcon />}
+                    onClick={()=>{
+                        setIsBoxVisible(false)
+                    }}
+                />
                 <Center>
-                <iframe frameborder="0" src="https://itch.io/embed-upload/11556075?color=333333"  width="640" height="380" allowfullscreen=""><a href="https://vnbnodegamefi.itch.io/chicken-war-game-dymension-3d">Play Chicken War Game - Dymension 3D on itch.io</a></iframe>
-
+                    <Box
+                        dangerouslySetInnerHTML={{ __html: iframeContent }} // Render the iframe content
+                    />
                 </Center>
             </Box>
 
@@ -204,11 +228,10 @@ export default function WithBackgroundImage() {
                         borderColor='#ffa00b'
                         fontWeight={"500px"}
                         fontSize={"23px"}
-                        onClick={() => window.open(currentItem.link_btn, "_blank")}
+                        onClick={handleButtonClick} // Trigger iframe box on button click
                     >
                         {currentItem.text_button}
                     </Button>
-
                 </Stack>
             </VStack>
             {/* Pass items and currentIndex to HorizontalNav */}
