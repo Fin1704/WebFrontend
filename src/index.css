@@ -12,3 +12,20 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.modal_sweetalert2 {
+  background-color: black;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); /* Adjust the values as needed */
+  color: white;
+}
+.btn_confrim_sweetalert2{
+  background-color: rgb(202, 38, 38);
+  border-radius: 30px;
+  border: 6px;
+  border-color: rgb(255, 160, 11);
+  border-style: solid;
+}
+.input_sweetalert2{
+  border-radius: 30px;
+  background-color: white;
+  color: black;
+}

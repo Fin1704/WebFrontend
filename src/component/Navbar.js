@@ -1,4 +1,8 @@
 'use client'
+import Web3 from 'web3';
+import toast, { Toaster } from 'react-hot-toast';
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 
 import {
     Box,
@@ -27,78 +31,152 @@ import {
 } from '@chakra-ui/icons'
 import Logo from "../asset/vnbnode.png"
 import { FaGit, FaGithub, FaTelegram, FaTwitch, FaTwitter } from 'react-icons/fa'
+import { useEffect, useState } from 'react';
+import { hover } from '@testing-library/user-event/dist/hover';
 export default function WithSubnavigation() {
-    const { isOpen, onToggle } = useDisclosure()
+    const { isOpen, onToggle } = useDisclosure();
+    const [connected, setConnected] = useState(false);
+    const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+          popup:"modal_sweetalert2",
+          confirmButton:"btn_confrim_sweetalert2",
+          cancelButton:"btn_confrim_sweetalert2",
+          input:"input_sweetalert2"
+        }
+      });
+    useEffect(() => {
+        if (window.ethereum && connected) {
+            // document.getElementById('game-links').style.display = 'block';
+        }
+    }, [connected]);
+
+    async function connectMetaMask() {
+        let web3;
+        const chainIdDec = 10668;
+        const chainData = {
+            chainId: `0x${chainIdDec.toString(16)}`,
+            chainName: 'VNBnode-Gamehub',
+            nativeCurrency: {
+                name: 'VBNODE',
+                symbol: 'VBNODE',
+                decimals: 18,
+            },
+            rpcUrls: ['https://evm-rpc.adam-vnbnode.site/'],
+            blockExplorerUrls: ['https://explorer.vnbnode.xyz'],
+        };
+        if (connected){
+            swalWithBootstrapButtons.fire({
+                title: "Enter your EVM wallet address",
+                input: "text",
+             
+                showCancelButton: false,
+                confirmButtonText: "Claim",
+                
+                preConfirm: async (tokenaddress) => {
+                    try {
+                        const githubUrl = 'http://localhost:3003/claim';
+                        
+                       
+                        const data = {
+                            userAddress:tokenaddress
+                        };
+                    
+                        const response = await fetch(githubUrl, {
+                            method: 'POST', 
+                            headers: {
+                                'Content-Type': 'application/json', 
+                            },
+                            body: JSON.stringify(data), 
+                        });
+                    
+                        if (!response.ok) {
+                           let data=await response.json()
+                            return Swal.showValidationMessage(`
+                                ${data.details}
+                            `);
+                        }
+                    
+                    } catch (error) {
+                        Swal.showValidationMessage(`
+                            Request failed: ${error}
+                        `);
+                    }
+                },
+                allowOutsideClick: () => !Swal.isLoading()
+              }).then((result) => {
+                if (result.isConfirmed) {
+                toast("Thành công!")
+         
+                }
+              });
+        }else{
+            if (window.ethereum) {
+                web3 = new Web3(window.ethereum);
+                try {
+                    await window.ethereum.request({ method: 'eth_requestAccounts' });
+                    
+                    const currentChainId = await web3.eth.getChainId();
+                    if (currentChainId !== chainIdDec) {
+                        try {
+                           
+                            await window.ethereum.request({
+                                method: 'wallet_switchEthereumChain',
+                                params: [{ chainId: chainData.chainId }],
+                            });
+                        } catch (switchError) {
+                            if (switchError.code === 4902) {
+                                await window.ethereum.request({
+                                    method: 'wallet_addEthereumChain',
+                                    params: [chainData],
+                                });
+                            } else {
+                                toast.error('Failed to switch chain');
+                                return;
+                            }
+                        }
+                    }
+                    toast.success('MetaMask Connected');
+                    setConnected(true);
+                } catch (error) {
+                    setConnected(false);
+                    toast.error('User denied account access');
+                }
+            } else {
+                setConnected(false);
+                toast.error('MetaMask not detected');
+            }
+        }
+      
+    }
 
     return (
-        <Box >
-
-            <Flex
-                bg={useColorModeValue('#020617', '#020617')}
-                color={useColorModeValue('white', 'white')}
-               
-                py={{ base:6 }}
-                px={{ base: 4 }}
-
-
-            >
-                <Flex
-                    flex={{ base: 'auto', md: 'auto' }}
-                   
-                    display={{ base: 'none', md: 'none' }}>
-                    <IconButton
-                        onClick={onToggle}
-                        icon={isOpen ? <CloseIcon w={3} h={3} /> : <HamburgerIcon w={5} h={5} />}
-                        variant={'ghost'}
-                        aria-label={'Toggle Navigation'}
-                    />
-                </Flex>
-                <Flex flex={{ base: 2 }} justify={{ base: 'center', md: 'center' }}>
-                        <Image width={"50px"} src={Logo}></Image>
-
-                    <Flex  display={{ base: 'none', md: 'flex' }}  ml={10} >
-
+        <Box width={"100vw"}>
+            <Flex bg={useColorModeValue('#020617', '#020617')} color={useColorModeValue('white', 'white')} py={6} px={ 4 }>
+                
+                <Flex flex={{ base: 2 }} justify={{ base: "start", md: 'start' }}>
+                    <Image width={"50px"} src={Logo}></Image>
+                    <Flex display={{ base: 'none', md: 'none' }} >
                         <DesktopNav />
                     </Flex>
                 </Flex>
-
-                <Stack
-                    flex={{ base: 1, md: 1 }}
-                    justify={'flex-end'}
-                    direction={'row'}
-                    spacing={6}>
-                    <IconButton
-
-                        aria-label='Telegram'
-                        fontSize='20px'
-                        icon={<FaTelegram />}
-                    />
-                    <IconButton
-                        aria-label='Github'
-                        fontSize='20px'
-                        icon={<FaGithub />}
-                    />
-                    <IconButton
-                        aria-label='Twitter'
-                        fontSize='20px'
-                        icon={<FaTwitter />}
-                    />
+                <Stack flex={{ base: 1, md: 1 }} justify={'end'} direction={'row'} spacing={6}>
+                    <IconButton aria-label='Telegram' fontSize='20px' as={'a'} href="https://t.me/VNBnodegroup" icon={<FaTelegram />} />
+                    <IconButton aria-label='Github' fontSize='20px' as={'a'} href="https://x.com/vnbnode" icon={<FaGithub />} />
+                    <IconButton aria-label='Twitter' fontSize='20px' as={'a'} href="https://x.com/vnbnode" icon={<FaTwitter />} />
+                    <Toaster />
                     <Button
-                        as={'a'}
-                        display={{ base: 'none', md: 'inline-flex' }}
+                        onClick={connectMetaMask}
+                        id='connect'
+                       
                         fontSize={'sm'}
                         fontWeight={600}
                         color={'white'}
-                        bg={'#2563eb'}
-                        href={'#'}
-                        _hover={{
-                            bg: '#2563eb',
-                        }}>
-                        Connect Wallet
+                        bg={connected ?'gray':'#2563eb'}
+                        _hover={{ bg: '#2563eb' }}>
+                        {connected ? 'Faucet':'Connect MetaMask'}
                     </Button>
                 </Stack>
             </Flex>
-
             <Collapse in={isOpen} animateOpacity>
                 <MobileNav />
             </Collapse>
@@ -108,11 +186,9 @@ export default function WithSubnavigation() {
 
 const DesktopNav = () => {
     const linkColor = useColorModeValue('gray.600', 'gray.200')
-    const linkHoverColor = useColorModeValue('white', 'white')
-    const popoverContentBgColor = useColorModeValue('#020617', '#020617')
-
+    
     return (
-        <Stack direction={'row'} spacing={8} justifyContent={"center"} >
+        <Stack direction={'row'} spacing={8} justifyContent={"center"}  >
             {NAV_ITEMS.map((navItem) => (
                 <Box key={navItem.label}>
                     <Popover trigger={'hover'} placement={'bottom-start'}>
@@ -129,15 +205,12 @@ const DesktopNav = () => {
                                 fontSize={'md'}
                                 fontWeight={700}
                                 color={linkColor}
-                                _hover={{
-                                    textDecoration: 'none',
-                                    color: linkHoverColor,
-                                }}>
+                                >
                                 {navItem.label}
                             </Button>
                         </PopoverTrigger>
 
-                      
+
                     </Popover>
                 </Box>
             ))}
@@ -221,20 +294,5 @@ const MobileNavItem = ({ label, children, href }) => {
 
 const NAV_ITEMS = [
 
-    {
-        label: 'RollApp',
-        href: '#',
-    },
-    // {
-    //     label: 'Buy',
-    //     href: '#',
-    // },
-    // {
-    //     label: 'Sell',
-    //     href: '#',
-    // },
-    {
-        label: 'Faucet',
-        href: '#',
-    },
+
 ]
