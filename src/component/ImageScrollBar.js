@@ -1,14 +1,10 @@
 'use client'
 import { Stack, Flex, Button, Text, VStack, Image, Box, Center, IconButton } from '@chakra-ui/react'
-import TransImageLeft from "../asset/left-overlay.png"
-import TransImageRight from "../asset/right-overlay.png"
 import TransImageDown from "../asset/down-overlay.png"
-import TransImageTop from "../asset/top-overlay.png"
-import Game1 from "../asset/blackjack.jpg"
 import { useEffect, useRef, useState } from 'react'
 import { useSpring, animated } from 'react-spring';
 import { CloseIcon } from '@chakra-ui/icons'
-
+import json_config from '../asset/config.json';
 const HorizontalNav = ({ currentIndex, setCurrentIndex, items }) => {
     const maxItemsToShow = 4;
     const itemRefs = useRef([]);
@@ -103,7 +99,7 @@ export default function WithBackgroundImage() {
     useEffect(() => {
         async function fetchData() {
             try {
-                const response = await fetch('http://localhost:3003/games');
+                const response = await fetch(json_config.url+'/games');
                 const data = await response.json();
                 setItems(data);
                 setCurrentItem(data[0]); // Set the first item as the current item
