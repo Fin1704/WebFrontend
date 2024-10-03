@@ -118,7 +118,7 @@ export default function WithSubnavigation() {
                     const currentChainId = await web3.eth.getChainId();
                     if (currentChainId !== chainIdDec) {
                         try {
-                           
+                            await window.ethereum.request({ method: 'eth_requestAccounts' });
                             await window.ethereum.request({
                                 method: 'wallet_switchEthereumChain',
                                 params: [{ chainId: chainData.chainId }],

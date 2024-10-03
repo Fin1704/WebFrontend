@@ -1,10 +1,12 @@
 'use client'
-import { Stack, Flex, Button, Text, VStack, Image, Box, Center, IconButton } from '@chakra-ui/react'
+import { Stack, Flex, Button, Text, VStack, Image, Box, Center, IconButton, Skeleton, Spinner } from '@chakra-ui/react'
 import TransImageDown from "../asset/down-overlay.png"
 import { useEffect, useRef, useState } from 'react'
 import { useSpring, animated } from 'react-spring';
 import { CloseIcon } from '@chakra-ui/icons'
 import json_config from '../asset/config.json';
+import toast from 'react-hot-toast';
+import Typical from 'react-typical';
 const HorizontalNav = ({ currentIndex, setCurrentIndex, items }) => {
     const maxItemsToShow = 4;
     const itemRefs = useRef([]);
@@ -20,6 +22,7 @@ const HorizontalNav = ({ currentIndex, setCurrentIndex, items }) => {
     }, [currentIndex]);
 
     return (
+        
         <Flex alignItems="end" bottom={"0px"} justifyContent="center" mb={4} w="full" position="fixed" zIndex={3}>
             <Button
                 onClick={() => setCurrentIndex((prevIndex) => (prevIndex - 1 + items.length) % items.length)}
@@ -77,8 +80,8 @@ export default function WithBackgroundImage() {
     const [items, setItems] = useState([]);
     const [currentIndex, setCurrentIndex] = useState(0);
     const [currentItem, setCurrentItem] = useState();
-    const [isBoxVisible, setIsBoxVisible] = useState(false); 
-    const [iframeContent, setIframeContent] = useState(''); 
+    const [isBoxVisible, setIsBoxVisible] = useState(false);
+    const [iframeContent, setIframeContent] = useState('');
 
     const fadeInProps = useSpring({
         opacity: 1,
@@ -99,13 +102,24 @@ export default function WithBackgroundImage() {
     useEffect(() => {
         async function fetchData() {
             try {
-                const response = await fetch(json_config.url+'/games');
+                const response = await fetch(json_config.url + '/games');
                 const data = await response.json();
                 setItems(data);
-                setCurrentItem(data[0]); 
+                setCurrentItem(data[0]);
                 setCurrentIndex(0);
+                localStorage.setItem('gameListCache', JSON.stringify(data));
             } catch (error) {
-                console.error('Error fetching games:', error);
+               
+                toast.error(String(error))
+                let cache_data=localStorage.getItem('gameListCache');
+                if (cache_data){
+                    let data=JSON.parse(cache_data)
+                    setItems(data);
+                    setCurrentItem(data[0]);
+                    setCurrentIndex(0);
+                }
+              
+                
             }
         }
 
@@ -117,12 +131,22 @@ export default function WithBackgroundImage() {
     }, [currentIndex, items]);
 
     if (!currentItem) {
-        return <div>Loading...</div>;
+        return <Stack align={"center"}>
+            
+            <Spinner
+                thickness='4px'
+                speed='0.65s'
+                emptyColor='gray.200'
+                color='blue.500'
+                size='xl'
+            />
+            <Text as='sup' padding={"13px"}></Text>
+        </Stack>;
     }
 
     const handleButtonClick = () => {
-        setIframeContent(currentItem.iframe); 
-        setIsBoxVisible(true); 
+        setIframeContent(currentItem.iframe);
+        setIsBoxVisible(true);
     };
 
     return (
@@ -132,7 +156,7 @@ export default function WithBackgroundImage() {
             position="fixed"
             backgroundSize={"cover"}
             backgroundPosition={'center center'}
-        >
+        > 
             <Box
                 width={"100vw"}
                 alignContent={"center"}
@@ -148,7 +172,7 @@ export default function WithBackgroundImage() {
                     colorScheme='teal'
                     aria-label='Close'
                     icon={<CloseIcon />}
-                    onClick={()=>{
+                    onClick={() => {
                         setIsBoxVisible(false)
                     }}
                 />
@@ -202,6 +226,7 @@ export default function WithBackgroundImage() {
                         >
                             {currentItem.title}
                         </Text>
+                        
                         <Text
                             color={"gray.200"}
                             lineHeight={1.4}
@@ -225,14 +250,20 @@ export default function WithBackgroundImage() {
                         fontWeight={"500px"}
                         fontSize={"23px"}
                         _hover={"none"}
-                        onClick={handleButtonClick} 
+                        onClick={handleButtonClick}
                     >
                         {currentItem.text_button}
                     </Button>
                 </Stack>
             </VStack>
             {/* Pass items and currentIndex to HorizontalNav */}
+
             <HorizontalNav currentIndex={currentIndex} setCurrentIndex={setCurrentIndex} items={items} />
+            <Box zIndex={4} position={"fixed"} bottom={0}><Typical
+        steps={[' © VnbNode',1000]}
+        loop={Infinity}
+        wrapper="p"
+      /></Box>
         </Flex>
     );
 }
