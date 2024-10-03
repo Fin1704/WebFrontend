@@ -3,6 +3,7 @@ import Web3 from 'web3';
 import toast, { Toaster } from 'react-hot-toast';
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
+import json_config from '../asset/config.json';
 
 import {
     Box,
@@ -74,7 +75,7 @@ export default function WithSubnavigation() {
                 
                 preConfirm: async (tokenaddress) => {
                     try {
-                        const githubUrl = 'http://localhost:3003/claim';
+                        const githubUrl = json_config.url+'/claim';
                         
                        
                         const data = {
