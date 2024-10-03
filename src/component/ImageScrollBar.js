@@ -6,7 +6,29 @@ import { useSpring, animated } from 'react-spring';
 import { CloseIcon } from '@chakra-ui/icons'
 import json_config from '../asset/config.json';
 import toast from 'react-hot-toast';
-import Typical from 'react-typical';
+
+const _items = [
+    {
+        title: 'CHICKEN MERGE & WAR',
+        image: 'https://testnet.mushiclub.app/banner/flappybird-thumb.jpg',
+        subtitle: "Flappy Bird",
+        subdescribe: "Flappy Bird: RollApp Edition - where superhero birds take flight! Dodge obstacles, battle villains, and flap to victory. Fly as Iron Bird, Captain Flutter, or Hawkeye Fly. Prepare for laughs and epic avian adventures!",
+        subimage: "https://i.postimg.cc/7ZyDKM5s/chicken-war-3-D.webp",
+        link_btn:"https://playground.dymension.xyz/rollapps/vnbnodegamehub_10668-1/dashboard",
+        text_button:"Play Now wfwaf",
+        iframe:`<iframe frameborder="0" src="https://itch.io/embed-upload/11556075?color=333333" allowfullscreen="" width="640" height="380"><a href="https://vnbnodegamefi.itch.io/chicken-war-game-dymension-3d">Play Chicken War Game - Dymension 3D on itch.io</a></iframe>`
+    },
+    {
+        title: 'Flappy Bird 1',
+        image: 'https://testnet.mushiclub.app/banner/flappybird-thumb.jpg',
+        subtitle: "Flappy Bird 1",
+        subdescribe: "Flappy Bird: RollApp Edition - where superhero birds take flight! Dodge obstacles, battle villains, and flap to victory. Fly as Iron Bird, Captain Flutter, or Hawkeye Fly. Prepare for laughs and epic avian adventures!",
+        subimage: "https://testnet.mushiclub.app/banner/blackjack.jpg",
+        link_btn:"https://playground.dymension.xyz/rollapps/vnbnodegamehub_10668-1/dashboard",
+        text_button:"Play Now afaf",
+        iframe:`<iframe frameborder="0" src="https://itch.io/embed-upload/11556075?color=333333" allowfullscreen="" width="640" height="380"><a href="https://vnbnodegamefi.itch.io/chicken-war-game-dymension-3d">Play Chicken War Game - Dymension 3D on itch.io</a></iframe>`
+    },
+]
 const HorizontalNav = ({ currentIndex, setCurrentIndex, items }) => {
     const maxItemsToShow = 4;
     const itemRefs = useRef([]);
@@ -77,9 +99,9 @@ const HorizontalNav = ({ currentIndex, setCurrentIndex, items }) => {
 };
 
 export default function WithBackgroundImage() {
-    const [items, setItems] = useState([]);
+    const [items, setItems] = useState(_items);
     const [currentIndex, setCurrentIndex] = useState(0);
-    const [currentItem, setCurrentItem] = useState();
+    const [currentItem, setCurrentItem] = useState(_items[0]);
     const [isBoxVisible, setIsBoxVisible] = useState(false);
     const [iframeContent, setIframeContent] = useState('');
 
@@ -123,7 +145,7 @@ export default function WithBackgroundImage() {
             }
         }
 
-        fetchData();
+        // fetchData();
     }, []);
 
     useEffect(() => {
@@ -259,11 +281,7 @@ export default function WithBackgroundImage() {
             {/* Pass items and currentIndex to HorizontalNav */}
 
             <HorizontalNav currentIndex={currentIndex} setCurrentIndex={setCurrentIndex} items={items} />
-            <Box zIndex={4} position={"fixed"} bottom={0}><Typical
-        steps={[' © VnbNode',1000]}
-        loop={Infinity}
-        wrapper="p"
-      /></Box>
+            
         </Flex>
     );
 }

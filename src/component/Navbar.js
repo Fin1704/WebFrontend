@@ -161,8 +161,8 @@ export default function WithSubnavigation() {
                     </Flex>
                 </Flex>
                 <Stack flex={{ base: 1, md: 1 }} justify={'end'} direction={'row'} spacing={6}>
-                    <IconButton aria-label='Telegram' fontSize='20px' as={'a'} href="https://t.me/VNBnodegroup" icon={<FaTelegram />} />
-                    <IconButton aria-label='Twitter' fontSize='20px' as={'a'} href="https://x.com/vnbnode" icon={<FaTwitter />} />
+                    <IconButton backgroundColor={"gray"} aria-label='Telegram' fontSize='20px' as={'a'} href="https://t.me/VNBnodegroup" icon={<FaTelegram />} />
+                    <IconButton backgroundColor={"gray"} aria-label='Twitter' fontSize='20px' as={'a'} href="https://x.com/vnbnode" icon={<FaTwitter />} />
                     <Toaster />
                     <Button
                         onClick={connectMetaMask}
