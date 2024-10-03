@@ -77,8 +77,8 @@ export default function WithBackgroundImage() {
     const [items, setItems] = useState([]);
     const [currentIndex, setCurrentIndex] = useState(0);
     const [currentItem, setCurrentItem] = useState();
-    const [isBoxVisible, setIsBoxVisible] = useState(false); // New state to control box visibility
-    const [iframeContent, setIframeContent] = useState(''); // New state to store iframe content
+    const [isBoxVisible, setIsBoxVisible] = useState(false); 
+    const [iframeContent, setIframeContent] = useState(''); 
 
     const fadeInProps = useSpring({
         opacity: 1,
@@ -102,7 +102,7 @@ export default function WithBackgroundImage() {
                 const response = await fetch(json_config.url+'/games');
                 const data = await response.json();
                 setItems(data);
-                setCurrentItem(data[0]); // Set the first item as the current item
+                setCurrentItem(data[0]); 
                 setCurrentIndex(0);
             } catch (error) {
                 console.error('Error fetching games:', error);
@@ -113,16 +113,16 @@ export default function WithBackgroundImage() {
     }, []);
 
     useEffect(() => {
-        setCurrentItem(items[currentIndex]); // Update current item when index changes
+        setCurrentItem(items[currentIndex]);
     }, [currentIndex, items]);
 
     if (!currentItem) {
-        return <div>Loading...</div>; // Show loading state while fetching data
+        return <div>Loading...</div>;
     }
 
     const handleButtonClick = () => {
-        setIframeContent(currentItem.iframe); // Set the iframe content from currentItem
-        setIsBoxVisible(true); // Show the box with iframe
+        setIframeContent(currentItem.iframe); 
+        setIsBoxVisible(true); 
     };
 
     return (
@@ -224,7 +224,8 @@ export default function WithBackgroundImage() {
                         borderColor='#ffa00b'
                         fontWeight={"500px"}
                         fontSize={"23px"}
-                        onClick={handleButtonClick} // Trigger iframe box on button click
+                        _hover={"none"}
+                        onClick={handleButtonClick} 
                     >
                         {currentItem.text_button}
                     </Button>
