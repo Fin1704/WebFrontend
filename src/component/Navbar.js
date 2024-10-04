@@ -154,15 +154,19 @@ export default function WithSubnavigation() {
         <Box width={"100vw"}>
             <Flex bg={useColorModeValue('#020617', '#020617')} color={useColorModeValue('white', 'white')} py={6} px={ 4 }>
                 
-                <Flex flex={{ base: 2 }} justify={{ base: "start", md: 'start' }}>
-                    <Image width={"50px"} src={Logo}></Image>
-                    <Flex display={{ base: 'none', md: 'none' }} >
-                        <DesktopNav />
-                    </Flex>
-                </Flex>
+            <Flex flex={{ base: 1 }} justify={{ base: "start", md: 'start' }}>
+    <Image width={"50px"} src={Logo}></Image>
+    <Center display={{ base: 'none', md: 'flex' }} fontSize={{ md: '11px',xl:'15px' }} > 
+        VNBnode provides services to operate Rollapps Sequencer on Dymension
+    </Center>
+    <Text color={"white"}></Text>
+    <Flex display={{ base: 'none', md: 'none' }}>
+        <DesktopNav />
+    </Flex>
+</Flex>
                 <Stack flex={{ base: 1, md: 1 }} justify={'end'} direction={'row'} spacing={6}>
-                    <IconButton backgroundColor={"gray"} aria-label='Telegram' fontSize='20px' as={'a'} href="https://t.me/VNBnodegroup" icon={<FaTelegram />} />
-                    <IconButton backgroundColor={"gray"} aria-label='Twitter' fontSize='20px' as={'a'} href="https://x.com/vnbnode" icon={<FaTwitter />} />
+                    <IconButton backgroundColor={"gray.700"} aria-label='Telegram' fontSize='20px' as={'a'} href="https://t.me/VNBnodegroup" icon={<FaTelegram />} />
+                    <IconButton backgroundColor={"gray.700"} aria-label='Twitter' fontSize='20px' as={'a'} href="https://x.com/vnbnode" icon={<FaTwitter />} />
                     <Toaster />
                     <Button
                         onClick={connectMetaMask}

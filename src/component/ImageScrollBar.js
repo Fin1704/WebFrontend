@@ -9,24 +9,34 @@ import toast from 'react-hot-toast';
 
 const _items = [
     {
-        title: 'CHICKEN MERGE & WAR',
-        image: 'https://testnet.mushiclub.app/banner/flappybird-thumb.jpg',
-        subtitle: "Flappy Bird",
-        subdescribe: "Flappy Bird: RollApp Edition - where superhero birds take flight! Dodge obstacles, battle villains, and flap to victory. Fly as Iron Bird, Captain Flutter, or Hawkeye Fly. Prepare for laughs and epic avian adventures!",
-        subimage: "https://i.postimg.cc/7ZyDKM5s/chicken-war-3-D.webp",
+        title: 'VNBnode Rollapp',
+        image: 'https://cdn.discordapp.com/attachments/1289031386971377684/1291592673362444341/background.png?ex=6700a8e9&is=66ff5769&hm=70febce7adcdb117124d8c4696183a8e5d9387be98766a90beb1b82ee4381a73&',
+        subtitle: "VNBnode Rollapp",
+        subdescribe: " Visit our VNBnode's Rollapp to exchange tokens, providing liquidity and staking for more rewards.",
+        subimage: "https://cdn.discordapp.com/attachments/1289031386971377684/1291592673362444341/background.png?ex=6700a8e9&is=66ff5769&hm=70febce7adcdb117124d8c4696183a8e5d9387be98766a90beb1b82ee4381a73&",
         link_btn:"https://playground.dymension.xyz/rollapps/vnbnodegamehub_10668-1/dashboard",
-        text_button:"Play Now wfwaf",
+        text_button:"Visit",
+        // iframe:`<iframe frameborder="0" src="https://itch.io/embed-upload/11556075?color=333333" allowfullscreen="" width="640" height="380"><a href="https://vnbnodegamefi.itch.io/chicken-war-game-dymension-3d">Play Chicken War Game - Dymension 3D on itch.io</a></iframe>`
+    },
+    {
+        title: 'Chicken War',
+        image: 'https://cdn.discordapp.com/attachments/1289031386971377684/1290191721421864980/thumb2.png?ex=67002d6c&is=66fedbec&hm=8b69ec5c13cd8f3e28fc4a268d05311ea249aaff005b08ae75947af9e2ccd545&',
+        subtitle: "Chicken War",
+        subdescribe: "The village of chickens is attacked by gangs of wolves and zombies. The chickens have to fight for their lives. Please play the game and help the chickens.",
+        subimage: "https://cdn.discordapp.com/attachments/1289031386971377684/1290186393145966673/Logo2.png?ex=67002876&is=66fed6f6&hm=94eb4a8a164ba04a596362b8d7afda2e4ba085c75fe8673b57bd7c4e7c6a188f&",
+        link_btn:"https://playground.dymension.xyz/rollapps/vnbnodegamehub_10668-1/dashboard",
+        text_button:"Play Now",
         iframe:`<iframe frameborder="0" src="https://itch.io/embed-upload/11556075?color=333333" allowfullscreen="" width="640" height="380"><a href="https://vnbnodegamefi.itch.io/chicken-war-game-dymension-3d">Play Chicken War Game - Dymension 3D on itch.io</a></iframe>`
     },
     {
-        title: 'Flappy Bird 1',
-        image: 'https://testnet.mushiclub.app/banner/flappybird-thumb.jpg',
-        subtitle: "Flappy Bird 1",
-        subdescribe: "Flappy Bird: RollApp Edition - where superhero birds take flight! Dodge obstacles, battle villains, and flap to victory. Fly as Iron Bird, Captain Flutter, or Hawkeye Fly. Prepare for laughs and epic avian adventures!",
-        subimage: "https://testnet.mushiclub.app/banner/blackjack.jpg",
+        title: 'Tower Defend',
+        image: 'https://cdn.discordapp.com/attachments/1289031386971377684/1290191721166278749/thumb1.png?ex=67002d6c&is=66fedbec&hm=16df547520c8fb759d45ee67cb4b48b6d330dad857d587c0ffda26d9b38f89f1&',
+        subtitle: "Tower Defend",
+        subdescribe: "An ancient tower in the middle of the forest, is being attacked by ferocious beasts, you are the general leading the army, please fight with us.",
+        subimage: "https://cdn.discordapp.com/attachments/1289031386971377684/1290191689683697715/banner_2.png?ex=67002d65&is=66fedbe5&hm=ab4269ae42e76c3000267f52686302378cc2994178543b70cf89823effd4894a&",
         link_btn:"https://playground.dymension.xyz/rollapps/vnbnodegamehub_10668-1/dashboard",
-        text_button:"Play Now afaf",
-        iframe:`<iframe frameborder="0" src="https://itch.io/embed-upload/11556075?color=333333" allowfullscreen="" width="640" height="380"><a href="https://vnbnodegamefi.itch.io/chicken-war-game-dymension-3d">Play Chicken War Game - Dymension 3D on itch.io</a></iframe>`
+        text_button:"Play Now",
+        iframe:`<iframe frameborder="0" src="https://itch.io/embed-upload/11578639?color=333333" allowfullscreen="" width="500" height="909"><a href="https://vnbnodegamefi.itch.io/3d-dymension-tower-defend">Play 3D Dymension Tower Defend on itch.io</a></iframe>`
     },
 ]
 const HorizontalNav = ({ currentIndex, setCurrentIndex, items }) => {
@@ -77,7 +87,7 @@ const HorizontalNav = ({ currentIndex, setCurrentIndex, items }) => {
                                 <Image
                                     src={item.image}
                                     alt={item.title}
-                                    boxSize="50px"
+                                    boxSize="30px"
                                     objectFit="cover"
                                     borderRadius="full"
                                     mr={2}
@@ -167,8 +177,13 @@ export default function WithBackgroundImage() {
     }
 
     const handleButtonClick = () => {
-        setIframeContent(currentItem.iframe);
-        setIsBoxVisible(true);
+        if(currentItem.iframe){
+            setIframeContent(currentItem.iframe);
+            setIsBoxVisible(true);
+        }else{
+            window.location.href =currentItem.link_btn
+        }
+        
     };
 
     return (
@@ -229,13 +244,13 @@ export default function WithBackgroundImage() {
             />
             <VStack
                 position="absolute"
-                bottom={{ base: "10%", xl: "3%" }}
+                bottom={"50px"}
                 left="50%"
                 transform="translate(-50%, -50%)"
                 w={'full'}
-                px={4} zIndex={2}
+                zIndex={2}
             >
-                <Stack maxW={'3xl'} width={"70%"}>
+                <Stack maxW={'3xl'} width={"70%"} >
                     <animated.div style={fadeInProps}>
                         <Text
                             color={"wheat"}
@@ -262,6 +277,7 @@ export default function WithBackgroundImage() {
                     </animated.div>
                     <Button
                         width={"40%"}
+                        color={"white"}
                         alignSelf={"center"}
                         background={"#ca2626"}
                         w={"60%"}
@@ -273,6 +289,7 @@ export default function WithBackgroundImage() {
                         fontSize={"23px"}
                         _hover={"none"}
                         onClick={handleButtonClick}
+                       
                     >
                         {currentItem.text_button}
                     </Button>
