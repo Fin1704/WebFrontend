@@ -10,10 +10,10 @@ import toast from 'react-hot-toast';
 const _items = [
     {
         title: 'VNBnode Rollapp',
-        image: 'https://cdn.discordapp.com/attachments/1289031386971377684/1291592672938823690/background.jpg?ex=670151a9&is=67000029&hm=b20263c6022a93df44d49afbd10d15613d8eb28acc80bd940d80de6a9681f413&',
+        image: 'https://cdn.discordapp.com/attachments/1289031386971377684/1292072999507464264/background.jpg?ex=67026840&is=670116c0&hm=65cfe6f4f8927ac50102beb94aa76e5616cbc0c7c0835f46908043f0678afb13&',
         subtitle: "VNBnode Rollapp",
         subdescribe: " Visit our VNBnode's Rollapp to exchange tokens, providing liquidity and staking for more rewards.",
-        subimage: "https://cdn.discordapp.com/attachments/1289031386971377684/1291592672938823690/background.jpg?ex=670151a9&is=67000029&hm=b20263c6022a93df44d49afbd10d15613d8eb28acc80bd940d80de6a9681f413&",
+        subimage: "https://cdn.discordapp.com/attachments/1289031386971377684/1292072999507464264/background.jpg?ex=67026840&is=670116c0&hm=65cfe6f4f8927ac50102beb94aa76e5616cbc0c7c0835f46908043f0678afb13&",
         link_btn:"https://playground.dymension.xyz/rollapps/vnbnodegamehub_10668-1/dashboard",
         text_button:"Visit",
         // iframe:`<iframe frameborder="0" src="https://itch.io/embed-upload/11556075?color=333333" allowfullscreen="" width="640" height="380"><a href="https://vnbnodegamefi.itch.io/chicken-war-game-dymension-3d">Play Chicken War Game - Dymension 3D on itch.io</a></iframe>`
@@ -34,9 +34,9 @@ const _items = [
         subtitle: "Tower Defend",
         subdescribe: "An ancient tower in the middle of the forest, is being attacked by ferocious beasts, you are the general leading the army, please fight with us.",
         subimage: "https://cdn.discordapp.com/attachments/1289031386971377684/1290191689683697715/banner_2.png?ex=67017ee5&is=67002d65&hm=b2139b05b225e073f60a093a0e57b758a4f6a7ea45d6478ee448c5d9879c1212&",
-        link_btn:"https://itch.io/embed-upload/11578639?color=333333",
+        link_btn:"https://playground.dymension.xyz/rollapps/vnbnodegamehub_10668-1/dashboard",
         text_button:"Play Now",
-        // iframe:`<iframe frameborder="0" src="https://itch.io/embed-upload/11578639?color=333333" allowfullscreen="" width="500" height="909"><a href="https://vnbnodegamefi.itch.io/3d-dymension-tower-defend">Play 3D Dymension Tower Defend on itch.io</a></iframe>`
+        iframe:`<iframe frameborder="0" src="https://itch.io/embed-upload/11578639?color=333333" allowfullscreen="" width="500" height="909"><a href="https://vnbnodegamefi.itch.io/3d-dymension-tower-defend">Play 3D Dymension Tower Defend on itch.io</a></iframe>`
     },
 ]
 const HorizontalNav = ({ currentIndex, setCurrentIndex, items }) => {
