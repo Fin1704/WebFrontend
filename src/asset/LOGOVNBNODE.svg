@@ -7,7 +7,6 @@
    width="518"
    height="472"
    viewBox="0 0 518 472"
-   sodipodi:docname="LOGO VNBNODE 1.svg"
    inkscape:version="1.2.2 (732a01da63, 2022-12-09)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
@@ -16,29 +15,8 @@
    xmlns:svg="http://www.w3.org/2000/svg">
   <defs
      id="defs984" />
-  <sodipodi:namedview
-     id="namedview982"
-     pagecolor="#ffffff"
-     bordercolor="#000000"
-     borderopacity="0.25"
-     inkscape:showpageshadow="2"
-     inkscape:pageopacity="0.0"
-     inkscape:pagecheckerboard="0"
-     inkscape:deskcolor="#d1d1d1"
-     showgrid="false"
-     inkscape:zoom="0.5"
-     inkscape:cx="-34"
-     inkscape:cy="237"
-     inkscape:window-width="1368"
-     inkscape:window-height="842"
-     inkscape:window-x="-6"
-     inkscape:window-y="-6"
-     inkscape:window-maximized="1"
-     inkscape:current-layer="g986" />
-  <g
-     inkscape:groupmode="layer"
-     inkscape:label="Image"
-     id="g986">
+  
+  <g>
     <image
        width="518"
        height="472"
