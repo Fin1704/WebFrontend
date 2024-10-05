@@ -34,9 +34,9 @@ const _items = [
         subtitle: "Tower Defend",
         subdescribe: "An ancient tower in the middle of the forest, is being attacked by ferocious beasts, you are the general leading the army, please fight with us.",
         subimage: "https://cdn.discordapp.com/attachments/1289031386971377684/1290191689683697715/banner_2.png?ex=67017ee5&is=67002d65&hm=b2139b05b225e073f60a093a0e57b758a4f6a7ea45d6478ee448c5d9879c1212&",
-        link_btn:"https://playground.dymension.xyz/rollapps/vnbnodegamehub_10668-1/dashboard",
+        link_btn:"https://itch.io/embed-upload/11578639?color=333333",
         text_button:"Play Now",
-        iframe:`<iframe frameborder="0" src="https://itch.io/embed-upload/11578639?color=333333" allowfullscreen="" width="500" height="909"><a href="https://vnbnodegamefi.itch.io/3d-dymension-tower-defend">Play 3D Dymension Tower Defend on itch.io</a></iframe>`
+        // iframe:`<iframe frameborder="0" src="https://itch.io/embed-upload/11578639?color=333333" allowfullscreen="" width="500" height="909"><a href="https://vnbnodegamefi.itch.io/3d-dymension-tower-defend">Play 3D Dymension Tower Defend on itch.io</a></iframe>`
     },
 ]
 const HorizontalNav = ({ currentIndex, setCurrentIndex, items }) => {
