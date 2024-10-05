@@ -166,7 +166,10 @@ export default function WithSubnavigation() {
                     </Flex>
                 </Flex>
                 <Stack flex={{ base: 1, md: 1 }} justify={'end'} direction={'row'} spacing={6}>
-                <IconButton color={"white"} backgroundColor={"gray.700"} aria-label='Telegram' fontSize='20px' as={'a'} href="https://vnbnode.com/" icon={logo_svg}/>
+                {/* <IconButton color={"white"} backgroundColor={"gray.700"} aria-label='Telegram' fontSize='20px' as={'a'} href="https://vnbnode.com/" icon={logo_svg}/> */}
+                <Button color={"white"} backgroundColor={"gray.700"} as={'a'}  href="https://vnbnode.com/" >
+    <Image src={Logo} height={"80%"}></Image>
+  </Button>
                     <IconButton color={"white"} backgroundColor={"gray.700"} aria-label='Telegram' fontSize='20px' as={'a'} href="https://t.me/VNBnodegroup" icon={<FaTelegram />} />
                     <IconButton color={"white"} backgroundColor={"gray.700"} aria-label='Twitter' fontSize='20px' as={'a'} href="https://x.com/vnbnode" icon={<FaTwitter />} />
                     <Toaster />

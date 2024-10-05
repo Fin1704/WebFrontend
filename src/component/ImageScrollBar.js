@@ -211,11 +211,11 @@ export default function WithBackgroundImage() {
             <Image
                 position="absolute"
                 bottom="0"
-                height={"100%"}
+                height={"50%"}
                 width={"100%"}
                 src={TransImageDown}
                 zIndex={2}
-                opacity={0.3}
+                opacity={1}
             />
             <VStack
                 position="absolute"
