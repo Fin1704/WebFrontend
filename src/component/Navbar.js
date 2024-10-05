@@ -39,12 +39,12 @@ export default function WithSubnavigation() {
     const [connected, setConnected] = useState(false);
     const swalWithBootstrapButtons = Swal.mixin({
         customClass: {
-          popup:"modal_sweetalert2",
-          confirmButton:"btn_confrim_sweetalert2",
-          cancelButton:"btn_confrim_sweetalert2",
-          input:"input_sweetalert2"
+            popup: "modal_sweetalert2",
+            confirmButton: "btn_confrim_sweetalert2",
+            cancelButton: "btn_confrim_sweetalert2",
+            input: "input_sweetalert2"
         }
-      });
+    });
     useEffect(() => {
         if (window.ethereum && connected) {
             // document.getElementById('game-links').style.display = 'block';
@@ -65,38 +65,38 @@ export default function WithSubnavigation() {
             rpcUrls: ['https://evm-rpc.adam-vnbnode.site/'],
             blockExplorerUrls: ['https://explorer.vnbnode.xyz'],
         };
-        if (connected){
+        if (connected) {
             swalWithBootstrapButtons.fire({
                 title: "Enter your EVM wallet address",
                 input: "text",
-             
+
                 showCancelButton: false,
                 confirmButtonText: "Claim",
-                
+
                 preConfirm: async (tokenaddress) => {
                     try {
-                        const githubUrl = json_config.url+'/claim';
-                        
-                       
+                        const githubUrl = json_config.url + '/claim';
+
+
                         const data = {
-                            userAddress:tokenaddress
+                            userAddress: tokenaddress
                         };
-                    
+
                         const response = await fetch(githubUrl, {
-                            method: 'POST', 
+                            method: 'POST',
                             headers: {
-                                'Content-Type': 'application/json', 
+                                'Content-Type': 'application/json',
                             },
-                            body: JSON.stringify(data), 
+                            body: JSON.stringify(data),
                         });
-                    
+
                         if (!response.ok) {
-                           let data=await response.json()
+                            let data = await response.json()
                             return Swal.showValidationMessage(`
                                 ${data.details}
                             `);
                         }
-                    
+
                     } catch (error) {
                         Swal.showValidationMessage(`
                             Request failed: ${error}
@@ -104,18 +104,18 @@ export default function WithSubnavigation() {
                     }
                 },
                 allowOutsideClick: () => !Swal.isLoading()
-              }).then((result) => {
+            }).then((result) => {
                 if (result.isConfirmed) {
-                toast("Thành công!")
-         
+                    toast("Thành công!")
+
                 }
-              });
-        }else{
+            });
+        } else {
             if (window.ethereum) {
                 web3 = new Web3(window.ethereum);
                 try {
                     await window.ethereum.request({ method: 'eth_requestAccounts' });
-                    
+
                     const currentChainId = await web3.eth.getChainId();
                     if (currentChainId !== chainIdDec) {
                         try {
@@ -147,37 +147,38 @@ export default function WithSubnavigation() {
                 toast.error('MetaMask not detected');
             }
         }
-      
+
     }
 
     return (
         <Box width={"100vw"}>
-            <Flex bg={useColorModeValue('#020617', '#020617')} color={useColorModeValue('white', 'white')} py={6} px={ 4 }>
-                
-            <Flex flex={{ base: 1 }} justify={{ base: "start", md: 'start' }}>
-    <Image width={"50px"} src={Logo}></Image>
-    <Center display={{ base: 'none', md: 'flex' }} fontSize={{ md: '11px',xl:'15px' }} > 
-        VNBnode provides services to operate Rollapps Sequencer on Dymension
-    </Center>
-    <Text color={"white"}></Text>
-    <Flex display={{ base: 'none', md: 'none' }}>
-        <DesktopNav />
-    </Flex>
-</Flex>
+            
+            <Flex bg={"white"}   color={useColorModeValue('black', 'black')} py={6} px={4}>
+
+                <Flex flex={{ base: 1 }} justify={{ base: "end", md: 'end' }}  >
+                    <Image width={"50px"} src={Logo}></Image>
+                    <Box alignItems={"center"} display={{ base: 'none', md: 'flex' }} justifyContent={"end"} fontSize={{ md: '17px', xl: '20px' }} >
+                        <b>VNBnode provides services to operate Rollapps Sequencer on Dymension</b>
+                    </Box>
+                    <Text color={"white"}></Text>
+                    <Flex display={{ base: 'none', md: 'none' }}>
+                        <DesktopNav />
+                    </Flex>
+                </Flex>
                 <Stack flex={{ base: 1, md: 1 }} justify={'end'} direction={'row'} spacing={6}>
-                    <IconButton backgroundColor={"gray.700"} aria-label='Telegram' fontSize='20px' as={'a'} href="https://t.me/VNBnodegroup" icon={<FaTelegram />} />
-                    <IconButton backgroundColor={"gray.700"} aria-label='Twitter' fontSize='20px' as={'a'} href="https://x.com/vnbnode" icon={<FaTwitter />} />
+                    <IconButton color={"white"} backgroundColor={"gray.700"} aria-label='Telegram' fontSize='20px' as={'a'} href="https://t.me/VNBnodegroup" icon={<FaTelegram />} />
+                    <IconButton color={"white"} backgroundColor={"gray.700"} aria-label='Twitter' fontSize='20px' as={'a'} href="https://x.com/vnbnode" icon={<FaTwitter />} />
                     <Toaster />
                     <Button
                         onClick={connectMetaMask}
                         id='connect'
-                       
+
                         fontSize={'sm'}
                         fontWeight={600}
                         color={'white'}
-                        bg={connected ?'gray':'#2563eb'}
+                        bg={connected ? 'gray' : '#2563eb'}
                         _hover={{ bg: '#2563eb' }}>
-                        {connected ? 'Faucet':'Connect MetaMask'}
+                        {connected ? 'Faucet' : 'Connect MetaMask'}
                     </Button>
                 </Stack>
             </Flex>
@@ -190,7 +191,7 @@ export default function WithSubnavigation() {
 
 const DesktopNav = () => {
     const linkColor = useColorModeValue('gray.600', 'gray.200')
-    
+
     return (
         <Stack direction={'row'} spacing={8} justifyContent={"center"}  >
             {NAV_ITEMS.map((navItem) => (
@@ -209,7 +210,7 @@ const DesktopNav = () => {
                                 fontSize={'md'}
                                 fontWeight={700}
                                 color={linkColor}
-                                >
+                            >
                                 {navItem.label}
                             </Button>
                         </PopoverTrigger>

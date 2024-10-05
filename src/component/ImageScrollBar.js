@@ -57,6 +57,7 @@ const HorizontalNav = ({ currentIndex, setCurrentIndex, items }) => {
         
         <Flex alignItems="end" bottom={"0px"} justifyContent="center" mb={4} w="full" position="fixed" zIndex={3}>
             <Button
+            backgroundColor={"gray.700"} color={"white"}
                 onClick={() => setCurrentIndex((prevIndex) => (prevIndex - 1 + items.length) % items.length)}
                 isDisabled={currentIndex === 0}
             >
@@ -99,6 +100,7 @@ const HorizontalNav = ({ currentIndex, setCurrentIndex, items }) => {
                 </Stack>
             </Flex>
             <Button
+            backgroundColor={"gray.700"} color={"white"}
                 onClick={() => setCurrentIndex((prevIndex) => (prevIndex + 1) % items.length)}
                 isDisabled={currentIndex >= items.length - 1}
             >
@@ -130,33 +132,6 @@ export default function WithBackgroundImage() {
         reset: true,
         config: { duration: 1000 },
     });
-
-    useEffect(() => {
-        async function fetchData() {
-            try {
-                const response = await fetch(json_config.url + '/games');
-                const data = await response.json();
-                setItems(data);
-                setCurrentItem(data[0]);
-                setCurrentIndex(0);
-                localStorage.setItem('gameListCache', JSON.stringify(data));
-            } catch (error) {
-               
-                toast.error(String(error))
-                let cache_data=localStorage.getItem('gameListCache');
-                if (cache_data){
-                    let data=JSON.parse(cache_data)
-                    setItems(data);
-                    setCurrentItem(data[0]);
-                    setCurrentIndex(0);
-                }
-              
-                
-            }
-        }
-
-        // fetchData();
-    }, []);
 
     useEffect(() => {
         setCurrentItem(items[currentIndex]);
@@ -244,13 +219,14 @@ export default function WithBackgroundImage() {
             />
             <VStack
                 position="absolute"
-                bottom={"50px"}
+                bottom={"35%"}
                 left="50%"
                 transform="translate(-50%, -50%)"
                 w={'full'}
                 zIndex={2}
             >
-                <Stack maxW={'3xl'} width={"70%"} >
+                
+                <Stack maxW={'3xl'} width={"100%"} >
                     <animated.div style={fadeInProps}>
                         <Text
                             color={"wheat"}
@@ -294,6 +270,8 @@ export default function WithBackgroundImage() {
                         {currentItem.text_button}
                     </Button>
                 </Stack>
+             
+         
             </VStack>
             {/* Pass items and currentIndex to HorizontalNav */}
 
